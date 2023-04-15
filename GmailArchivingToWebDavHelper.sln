@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMailArchivingToWebDavHelper", "GmailArchivingToWebDevHelper\GMailArchivingToWebDavHelper.csproj", "{E1D98AF2-25A9-41F5-9B14-33ED64336732}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMailArchivingToWebDavHelper", "GmailArchivingToWebDavHelper\GMailArchivingToWebDavHelper.csproj", "{E1D98AF2-25A9-41F5-9B14-33ED64336732}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
