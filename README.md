@@ -20,7 +20,7 @@ You can see the example configuration file in `GmailArchivingToWebDavHelper/apps
 ### Mail setting
 ```
 "MailServer": {
-    "Host": "", // Mail server host
+    "Host": "", // Mail server host (POP3)
     "Port": "", // Mail server port
     "Username": "", // Username for authenticate mail server
     "Password": "" // Password for authenticate mail server
