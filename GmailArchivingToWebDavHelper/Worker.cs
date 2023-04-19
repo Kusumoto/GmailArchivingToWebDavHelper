@@ -35,7 +35,7 @@ namespace GMailArchivingToWebDavHelper
 
             foreach (var mailMessageData in messagesWithAttachmentList)
             {
-                var filter = filterSettingList?.FirstOrDefault(f => new Regex(f.HeaderRegEx).IsMatch(mailMessageData.Header));
+                var filter = filterSettingList?.FirstOrDefault(f => IsMatchFromFilterSetting(f, mailMessageData.Header, mailMessageData.From));
                 
                 if (filter is null) continue;
                 await _messageProvider.SendMessage($"Email match in condition | Subject : {mailMessageData.Header}");
@@ -53,5 +53,9 @@ namespace GMailArchivingToWebDavHelper
             await _mailManager.DeleteMessage(messageMoveList);
             await _mailManager.CloseConnection();
         }
+
+        private static bool IsMatchFromFilterSetting(FilterSettingData filterSettingData, string header, string from) =>
+            new Regex(filterSettingData.HeaderRegEx).IsMatch(header) && from.Contains(filterSettingData.EmailFrom);
+
     }
 }

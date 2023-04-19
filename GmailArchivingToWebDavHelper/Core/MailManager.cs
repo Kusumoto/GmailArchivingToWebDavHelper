@@ -74,6 +74,7 @@ namespace GMailArchivingToWebDavHelper.Core
                     Header = message.Subject,
                     Body = message.TextBody,
                     Attachments = attachments,
+                    From = message.From.ToString()
                 });
             }
             _logger.LogInformation("Build and get email Done!");

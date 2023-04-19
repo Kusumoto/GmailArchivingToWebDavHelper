@@ -7,5 +7,6 @@
         public DateTimeOffset Date { get; set; }
         public List<AttachmentData> Attachments { get; set; } = new List<AttachmentData>();
         public int Index { get; set; }
+        public string From { get; set; } = "";
     }
 }

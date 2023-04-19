@@ -35,7 +35,8 @@ FYI, You mail server is require SSL
 "FilterSettings": [
     {
       "HeaderRegEx": "(?:ttb credit card e-statement)", // Regular Expression for filter email header
-      "FilePath": "/Statements/TTB%20Credit%20Card" // Target path WebDAV for save attachment
+      "FilePath": "/Statements/TTB%20Credit%20Card", // Target path WebDAV for save attachment
+      "EmailFrom": "estatement@eservice.ttbbank.com" // Email from for filter email sender
     }
   ],
   ```
