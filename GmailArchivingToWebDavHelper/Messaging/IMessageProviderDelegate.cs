@@ -1,7 +1,6 @@
-﻿namespace GMailArchivingToWebDavHelper.Messaging
+﻿namespace GMailArchivingToWebDavHelper.Messaging;
+
+public interface IMessageProviderDelegate
 {
-    public interface IMessageProviderDelegate
-    {
-        Task SendMessage(string message);
-    }
+    Task SendMessage(string message);
 }

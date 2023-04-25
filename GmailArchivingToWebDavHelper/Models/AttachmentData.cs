@@ -1,8 +1,7 @@
-﻿namespace GMailArchivingToWebDavHelper.Models
+﻿namespace GMailArchivingToWebDavHelper.Models;
+
+public class AttachmentData
 {
-    public class AttachmentData
-    {
-        public string Filename { get; set; } = "";
-        public MemoryStream DataStream { get; set; } = new MemoryStream();
-    }
+    public string Filename { get; set; } = "";
+    public MemoryStream DataStream { get; set; } = new();
 }

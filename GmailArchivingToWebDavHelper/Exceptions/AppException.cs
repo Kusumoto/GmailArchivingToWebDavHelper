@@ -1,7 +1,8 @@
-﻿namespace GMailArchivingToWebDavHelper.Exceptions
+﻿namespace GMailArchivingToWebDavHelper.Exceptions;
+
+public class AppException : Exception
 {
-    public class AppException : Exception
+    public AppException(string message) : base(message)
     {
-        public AppException(string message) : base(message) { }
     }
 }

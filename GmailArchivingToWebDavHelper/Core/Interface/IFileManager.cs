@@ -1,7 +1,6 @@
-﻿namespace GMailArchivingToWebDavHelper.Core.Interface
+﻿namespace GMailArchivingToWebDavHelper.Core.Interface;
+
+public interface IFileManager
 {
-    public interface IFileManager
-    {
-        Task UploadFileToWebDav(string filename, string path, MemoryStream stream);
-    }
+    Task UploadFileToWebDav(string filename, string path, MemoryStream stream);
 }

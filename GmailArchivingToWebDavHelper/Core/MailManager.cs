@@ -5,7 +5,6 @@ using MailKit.Net.Pop3;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MimeKit;
-using System.Net.Mail;
 
 namespace GMailArchivingToWebDavHelper.Core
 {

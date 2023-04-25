@@ -1,10 +1,9 @@
-﻿namespace GMailArchivingToWebDavHelper.Messaging
+﻿namespace GMailArchivingToWebDavHelper.Messaging;
+
+public class DiscordManager : IMessageProviderDelegate
 {
-    public class DiscordManager : IMessageProviderDelegate
+    public Task SendMessage(string message)
     {
-        public Task SendMessage(string message)
-        {
-            throw new NotImplementedException();
-        }
+        throw new NotImplementedException();
     }
 }
