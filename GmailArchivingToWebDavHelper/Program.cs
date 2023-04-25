@@ -15,13 +15,18 @@ if (config?.GetSection("EnableQuartz").Value is not "True")
 else
     await hostBuilder.RunAsync();
 
-static IConfigurationRoot ConfigurationBuilder() => new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddEnvironmentVariables()
-    .Build();
-static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
+static IConfigurationRoot ConfigurationBuilder()
+{
+    return new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json", false, true)
+        .AddEnvironmentVariables()
+        .Build();
+}
+
+static IHostBuilder CreateHostBuilder(string[] args)
+{
+    return Host.CreateDefaultBuilder(args)
         .ConfigureLogging(config =>
         {
             config.ClearProviders();
@@ -62,5 +67,5 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
                     .WithCronSchedule(quartzTime ?? "0 0 1 * * ?"));
             });
             services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
-
         });
+}
