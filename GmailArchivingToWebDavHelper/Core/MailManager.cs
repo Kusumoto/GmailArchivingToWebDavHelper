@@ -72,7 +72,7 @@ namespace GMailArchivingToWebDavHelper.Core
                 {
                     Index = i,
                     Header = message.Subject,
-                    Body = message.TextBody,
+                    Body = message.TextBody ?? message.HtmlBody,
                     Attachments = attachments,
                     From = message.From.ToString()
                 });
