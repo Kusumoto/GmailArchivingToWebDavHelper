@@ -48,8 +48,6 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
                     _ => throw new NotImplementedException("Provider not implement")
                 })!;
             });
-            services.AddTransient<IMessageProviderDelegate, LineManager>();
-            services.AddTransient<IMessageProviderDelegate, TelegramManager>();
             services.AddTransient<Worker>();
 
             if (hostBuilder.Configuration.GetSection("EnableQuartz").Value is not "True") return;
