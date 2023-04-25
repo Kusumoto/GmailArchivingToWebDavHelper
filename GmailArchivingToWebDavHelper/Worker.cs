@@ -35,13 +35,16 @@ namespace GMailArchivingToWebDavHelper
 
             foreach (var mailMessageData in messagesWithAttachmentList)
             {
-                var filter = filterSettingList?.FirstOrDefault(f => IsMatchFromFilterSetting(f, mailMessageData.Header, mailMessageData.From));
+                var filter = filterSettingList?.FirstOrDefault(f => IsMatchFromFilterSetting(f, mailMessageData));
                 
                 if (filter is null) continue;
                 await _messageProvider.SendMessage($"Email match in condition | Subject : {mailMessageData.Header}");
                 _logger.LogInformation($"Email match in condition | Subject : {mailMessageData.Header}");
 
-                foreach (var mailMessageAttachment in mailMessageData.Attachments)
+                var attachments = mailMessageData.Attachments
+                    .Where(mailMessageAttachment => string.IsNullOrEmpty(filter.FileFormatFilter) || new Regex(filter.FileFormatFilter).IsMatch(mailMessageAttachment.Filename));
+
+                foreach (var mailMessageAttachment in attachments)
                 {
                     await _fileManager.UploadFileToWebDav(mailMessageAttachment.Filename, filter.FilePath,
                         mailMessageAttachment.DataStream);
@@ -54,8 +57,9 @@ namespace GMailArchivingToWebDavHelper
             await _mailManager.CloseConnection();
         }
 
-        private static bool IsMatchFromFilterSetting(FilterSettingData filterSettingData, string header, string from) =>
-            new Regex(filterSettingData.HeaderRegEx).IsMatch(header) && from.Contains(filterSettingData.EmailFrom);
-
+        private static bool IsMatchFromFilterSetting(FilterSettingData filterSettingData,
+            MailMessageData mailMessageData) => new Regex(filterSettingData.HeaderRegEx).IsMatch(mailMessageData.Header) 
+                                                && mailMessageData.From.Contains(filterSettingData.EmailFrom)
+                                                && (!string.IsNullOrEmpty(filterSettingData.BodyRegEx) && new Regex(filterSettingData.BodyRegEx).IsMatch(mailMessageData.Body));
     }
 }
