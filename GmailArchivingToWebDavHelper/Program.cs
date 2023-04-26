@@ -42,6 +42,7 @@ static IHostBuilder CreateHostBuilder(string[] args)
             services.AddSingleton<IConfiguration>(ConfigurationBuilder());
             services.AddTransient<IFileManager, FileManager>();
             services.AddTransient<IMailManager, MailManager>();
+
             services.AddTransient<IMessageProviderDelegate>(serviceProvider =>
             {
                 var msgProvider = hostBuilder.Configuration.GetSection("MessagingDriver").Value;
@@ -53,6 +54,9 @@ static IHostBuilder CreateHostBuilder(string[] args)
                     _ => throw new NotImplementedException("Provider not implement")
                 })!;
             });
+            services.AddTransient<DiscordManager>();
+            services.AddTransient<TelegramManager>();
+            services.AddTransient<LineManager>();
             services.AddTransient<Worker>();
 
             if (hostBuilder.Configuration.GetSection("EnableQuartz").Value is not "True") return;
