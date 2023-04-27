@@ -47,7 +47,7 @@ static IHostBuilder CreateHostBuilder(string[] args)
             services.AddTransient<LineManager>();
             services.AddTransient<IMessageProviderDelegate>(serviceProvider =>
             {
-                var msgProvider = hostBuilder.Configuration.GetSection("MessagingDriver").Value;
+                var msgProvider = hostBuilder.Configuration.GetSection("MessageDriver").Value;
                 return (msgProvider switch
                 {
                     MessageProvider.Discord => serviceProvider.GetService<DiscordManager>(),
