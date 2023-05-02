@@ -61,9 +61,13 @@ public class Worker
     private static bool IsMatchFromFilterSetting(FilterSettingData filterSettingData,
         MailMessageData mailMessageData)
     {
-        return new Regex(filterSettingData.HeaderRegEx).IsMatch(mailMessageData.Header)
-               && mailMessageData.From.Contains(filterSettingData.EmailFrom)
-               && !string.IsNullOrEmpty(filterSettingData.BodyRegEx) &&
-               new Regex(filterSettingData.BodyRegEx).IsMatch(mailMessageData.Body);
+        if (string.IsNullOrEmpty(filterSettingData.BodyRegEx))
+            return new Regex(filterSettingData.HeaderRegEx).IsMatch(mailMessageData.Header)
+                   && mailMessageData.From.Contains(filterSettingData.EmailFrom);
+
+        return new Regex(filterSettingData.HeaderRegEx).IsMatch(mailMessageData.Header) 
+               && mailMessageData.From.Contains(filterSettingData.EmailFrom) 
+               && new Regex(filterSettingData.BodyRegEx).IsMatch(mailMessageData.Body);
+        
     }
 }
