@@ -8,7 +8,7 @@ using MimeKit;
 
 namespace GMailArchivingToWebDavHelper.Core;
 
-public class MailManager : IMailManager, IDisposable
+public class MailManager : IMailManager
 {
     private readonly IConfiguration _configuration;
     private readonly ILogger _logger;

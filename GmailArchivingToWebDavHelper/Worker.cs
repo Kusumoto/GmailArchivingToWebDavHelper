@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.IO;
+using System.Text.RegularExpressions;
 using GMailArchivingToWebDavHelper.Core.Interface;
 using GMailArchivingToWebDavHelper.Messaging;
 using GMailArchivingToWebDavHelper.Models;
@@ -56,6 +57,11 @@ public class Worker
 
         await _mailManager.DeleteMessage(messageMoveList);
         await _mailManager.CloseConnection();
+        messageMoveList.Clear();
+        messagesList.Clear();
+        messagesWithAttachmentList.Clear();
+        _mailManager.Dispose();
+        GC.Collect();
     }
 
     private static bool IsMatchFromFilterSetting(FilterSettingData filterSettingData,
