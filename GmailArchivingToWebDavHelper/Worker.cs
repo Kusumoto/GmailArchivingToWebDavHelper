@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using GMailArchivingToWebDavHelper.Core.Interface;
 using GMailArchivingToWebDavHelper.Messaging;
 using GMailArchivingToWebDavHelper.Models;
@@ -71,9 +70,8 @@ public class Worker
             return new Regex(filterSettingData.HeaderRegEx).IsMatch(mailMessageData.Header)
                    && mailMessageData.From.Contains(filterSettingData.EmailFrom);
 
-        return new Regex(filterSettingData.HeaderRegEx).IsMatch(mailMessageData.Header) 
-               && mailMessageData.From.Contains(filterSettingData.EmailFrom) 
+        return new Regex(filterSettingData.HeaderRegEx).IsMatch(mailMessageData.Header)
+               && mailMessageData.From.Contains(filterSettingData.EmailFrom)
                && new Regex(filterSettingData.BodyRegEx).IsMatch(mailMessageData.Body);
-        
     }
 }
