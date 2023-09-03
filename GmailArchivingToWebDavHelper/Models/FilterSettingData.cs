@@ -7,4 +7,5 @@ public class FilterSettingData
     public string EmailFrom { get; set; } = "";
     public string BodyRegEx { get; set; } = "";
     public string FileFormatFilter { get; set; } = "";
+    public string PrefixFilename { get; set; } = "";
 }

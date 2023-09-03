@@ -48,8 +48,7 @@ public class Worker
                                                     .Filename));
 
             foreach (var mailMessageAttachment in attachments)
-                await _fileManager.UploadFileToWebDav(mailMessageAttachment.Filename, filter.FilePath,
-                    mailMessageAttachment.DataStream);
+                await _fileManager.UploadFileToWebDav(mailMessageAttachment.Filename, filter, mailMessageAttachment.DataStream);
 
             messageMoveList.Add(mailMessageData);
         }

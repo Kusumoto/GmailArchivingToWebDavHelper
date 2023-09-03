@@ -3,6 +3,7 @@ using System.Text;
 using GMailArchivingToWebDavHelper.Core.Interface;
 using GMailArchivingToWebDavHelper.Exceptions;
 using GMailArchivingToWebDavHelper.Messaging;
+using GMailArchivingToWebDavHelper.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MimeKit;
@@ -22,12 +23,14 @@ public class FileManager : IFileManager
         _messageProvider = messageProvider;
     }
 
-    public virtual async Task UploadFileToWebDav(string filename, string path, MemoryStream stream)
+    public virtual async Task UploadFileToWebDav(string filename, FilterSettingData filterSetting, MemoryStream stream)
     {
         var basePath = _configuration.GetSection("WebDev").GetSection("BasePath").Value ?? "";
         var username = _configuration.GetSection("WebDev").GetSection("Username").Value ?? "";
         var password = _configuration.GetSection("WebDev").GetSection("Password").Value ?? "";
-        var uploadPath = string.Concat(basePath, path, "/", filename);
+        var prefixPathWithDateFormat = DateTime.Now.ToString(filterSetting.PrefixFilename);
+        var uploadPath = string.Concat(basePath, filterSetting.FilePath, "/", prefixPathWithDateFormat, "-", filename);
+
 
         using var httpClient = new HttpClient();
         var requestMessage = new HttpRequestMessage(HttpMethod.Put, uploadPath);
@@ -47,7 +50,7 @@ public class FileManager : IFileManager
             await _messageProvider.SendMessage(
                 $"Error upload file {requestMessage.RequestUri?.AbsoluteUri} | {response.StatusCode}");
             _logger.LogError($"Error upload file {requestMessage.RequestUri?.AbsoluteUri} | {response.StatusCode}");
-            throw new AppException($"Cannot upload file {path}/{filename}");
+            throw new AppException($"Cannot upload file {filterSetting.FilePath}/{filename}");
         }
 
         await _messageProvider.SendMessage($"Upload file {requestMessage.RequestUri?.AbsoluteUri} success!");
