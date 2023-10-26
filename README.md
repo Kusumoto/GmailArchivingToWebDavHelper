@@ -23,7 +23,8 @@ You can see the example configuration file in `GmailArchivingToWebDavHelper/apps
     "Host": "", // Mail server host (POP3)
     "Port": "", // Mail server port
     "Username": "", // Username for authenticate mail server
-    "Password": "" // Password for authenticate mail server
+    "Password": "", // Password for authenticate mail server
+	"Timeout": "" // Timeout for connect to SMTP server
   },
 ```
 FYI, You mail server is require SSL

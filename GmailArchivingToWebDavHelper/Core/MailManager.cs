@@ -34,6 +34,7 @@ public class MailManager : IMailManager
         var mailServerPort = _configuration.GetSection("MailServer").GetSection("Port").Value ?? "25";
         var mailServerUsername = _configuration.GetSection("MailServer").GetSection("Username").Value;
         var mailServerPassword = _configuration.GetSection("MailServer").GetSection("Password").Value;
+        _pop3Client.Timeout = (int)TimeSpan.FromMinutes(Convert.ToInt32(_configuration.GetSection("MailServer").GetSection("Timeout").Value)).TotalMilliseconds;
         await _pop3Client.ConnectAsync(mailServerHost, int.Parse(mailServerPort), true);
         await _pop3Client.AuthenticateAsync(mailServerUsername, mailServerPassword);
         _logger.LogInformation("Open POP3 connection");
