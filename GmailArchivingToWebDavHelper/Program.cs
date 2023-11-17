@@ -62,7 +62,6 @@ static IHostBuilder CreateHostBuilder(string[] args)
             var quartzTime = hostBuilder.Configuration.GetSection("QuartzTime").Value;
             services.AddQuartz(q =>
             {
-                q.UseMicrosoftDependencyInjectionJobFactory();
                 var jobKey = new JobKey("JobWorker");
                 q.AddJob<JobWorker>(jobKey);
                 q.AddTrigger(opts => opts
